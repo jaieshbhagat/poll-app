@@ -73,3 +73,12 @@ poll-app
 1. Login to ```Admin Console``` [localhost:8000/admin](http://localhost:8000/admin)
 1. Create ```General User``` using [Admin Console](http://localhost:8000/admin) and log out
 1. Goto ```Polling App``` [localhost:8000](http://localhost:8000) and login using the above created ```General User``` credentials
+
+## Screenshots
+### Homepage
+![Homepage Screenshot](screenshots/app_ss_1.png)
+![Login Screenshot](screenshots/app_ss_2.png)
+![Poll Screenshot](screenshots/app_ss_3.png)
+![Result Screenshot](screenshots/app_ss_4.png)
+![Admin User Screenshot](screenshots/admin_ss_1.png)
+![Admin Polls Screenshot](screenshots/admin_ss_2.png)
