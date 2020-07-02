@@ -1,0 +1,81 @@
+{% extends "polls/base.html" %}
+{% load static %}
+{% block title %}Questions - Polls{% endblock %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}"/>
+    {% if user.is_authenticated %}
+        <div class="w3-row">
+            <div class="w3-col l3 w3-border-left w3-cyan"
+                 style="z-index:3;height:100vh;overflow:auto">
+                <div class="w3-bar-block" id="mySidebar">
+                    <div class="w3-dropdown-hover">
+                        <a class="w3-button w3-bar-item"><i
+                                class="w3-margin-right fa fa-user"></i>Welcome {{ user.first_name }}<i
+                                class="w3-margin-left fa fa-caret-down"></i>
+                        </a>
+                        <div class="w3-dropdown-content w3-bar-block w3-border w3-card-4">
+                            <a href="#" class="w3-bar-item w3-button">Profile</a>
+                            <a href="{% url 'logout' %}" class="w3-bar-item w3-button">Logout</a>
+                        </div>
+                    </div>
+                    <div class="w3-bar-item">Questions</div>
+                    {% if latest_question_list %}
+                        {% for question in latest_question_list %}
+                            <a href="{% url 'polls:detail' question.id %}"
+                               class="w3-bar-item w3-button">{{ question.question_text }}</a>
+                        {% endfor %}
+                    {% else %}
+                        <p>No polls are available.</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="w3-col l9 w3-border-left w3-display-container" style="z-index:3;height:100vh;overflow:auto">
+                <div class="w3-display-middle w3-modal-content w3-card-4">
+                    <div class="w3-container w3-pink">
+                        <h3>{{ question.question_text }}</h3>
+                    </div>
+                    {% if error_message %}
+                        <div class="w3-container">
+                            <div class="w3-panel w3-red w3-display-container">
+                                <span onclick="this.parentElement.style.display='none'"
+                                      class="w3-button w3-display-topright">X</span>
+                                <div class="w3-margin">{{ error_message }}</div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <form action="{% url 'polls:vote' question.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="w3-margin">
+                            {% for choice in question.choice_set.all %}
+                                <input class="w3-radio" type="radio" name="choice"
+                                       id="choice{{ forloop.counter }}"
+                                       value="{{ choice.id }}"/>
+                                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br/>
+                            {% endfor %}
+                        </div>
+                        <div class="w3-row">
+                            <button class="w3-button w3-half w3-green" type="submit">Vote</button>
+                            <button class="w3-button w3-half w3-red" type="reset">Clear</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="w3-display-middle">
+        <div id="restricted" class="w3-animate-opacity">
+            <div class="w3-modal-content w3-card-4">
+                <header class="w3-container w3-orange">
+                    <h2>Hey There,</h2>
+                </header>
+                <div class="w3-container">
+                    <p>To use Polling, you first need to login!</p>
+                </div>
+                <footer class="w3-row">
+                    <a class="w3-button w3-half w3-green" href="{% url 'login' %}">Login</a>
+                    <a class="w3-button w3-half w3-purple" href="http://localhost:8000/admin/">Admin Login</a>
+                </footer>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

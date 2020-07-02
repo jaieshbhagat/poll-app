@@ -1,0 +1,39 @@
+{% extends "polls/base.html" %}
+{% load static %}
+{% block title %}Login - Polls{% endblock %}
+{% block content %}
+    <div class="w3-display-middle">
+        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+            <div class="w3-center"><br>
+                <img src="{% static 'polls/images/avatar2.png' %}" alt=" Avatar" style="width:30%" class="w3-circle
+        w3-margin-top">
+            </div>
+            {% if form.errors %}
+                <div class="w3-container">
+                    <div class="w3-panel w3-red w3-display-container">
+                        {{ form.non_field_errors }}
+                    </div>
+                </div>
+            {% endif %}
+            <form method="post">
+                {% csrf_token %}
+                <div class="w3-section w3-container">
+                    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username"
+                           name="username"
+                           autofocus=""
+                           maxlength="254" required id="id_username">
+                    <input type="password" class="w3-input w3-border" placeholder="Enter Password" name="password"
+                           id="id_password">
+                    <div class="w3-right w3-margin-top"><a href="#">Forgot password?</a></div>
+                </div>
+
+                <div class="w3-row">
+                    <button class="w3-button w3-third w3-green w3-padding" type="submit">Login</button>
+                    <button class="w3-button w3-third w3-blue w3-padding" type="reset">Reset</button>
+                    <button type="button" class="w3-button w3-third w3-red">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
