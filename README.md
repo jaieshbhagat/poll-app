@@ -77,8 +77,13 @@ poll-app
 ## Screenshots
 ### Homepage
 ![Homepage Screenshot](screenshots/app_ss_1.png)
+### Login
 ![Login Screenshot](screenshots/app_ss_2.png)
+### Polling
 ![Poll Screenshot](screenshots/app_ss_3.png)
+### Result
 ![Result Screenshot](screenshots/app_ss_4.png)
+### Admin User Management
 ![Admin User Screenshot](screenshots/admin_ss_1.png)
+### Admin Polls Management
 ![Admin Polls Screenshot](screenshots/admin_ss_2.png)
